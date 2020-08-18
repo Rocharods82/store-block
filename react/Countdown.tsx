@@ -9,14 +9,14 @@ import productReleaseDate from './queries/productReleaseDate.graphql'
 
 
 interface CountdownProps {
-  targetDate: string 
- }
+  targetDate: string
+}
 
 const DEFAULT_TARGET_DATE = (new Date('2020-06-25')).toISOString()
 const CSS_HANDLES = ['countdown']
 
 
-const Countdown: StorefrontFunctionComponent<CountdownProps> = ({  }) => {
+const Countdown: StorefrontFunctionComponent<CountdownProps> = ({ }) => {
   const [timeRemaining, setTime] = useState<TimeSplit>({
     hours: '00',
     minutes: '00',
@@ -28,9 +28,9 @@ const Countdown: StorefrontFunctionComponent<CountdownProps> = ({  }) => {
   const { product: { linkText } } = useProduct()
   const { data, loading, error } = useQuery(productReleaseDate, {
     variables: {
-     slug: linkText
+      slug: linkText
     },
-   ssr: false
+    ssr: false
   })
 
   tick(data?.product?.releaseDate || DEFAULT_TARGET_DATE, setTime)
